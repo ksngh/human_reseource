@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import entity.Member;
+import util.DBConnection;
 
 public class HRServiceImpl implements HRService {
+
+	DBConnection dbConnection = new DBConnection();
+
+	public HRServiceImpl(DBConnection dbConnection) {
+		this.dbConnection = dbConnection;
+	}
 
 	ArrayList<Integer> pageList = new ArrayList<>();
 
@@ -24,10 +31,10 @@ public class HRServiceImpl implements HRService {
 
 	}
 
-	@Override
-	public void printHRByDept(String dept) {
-
-	}
+	// @Override
+	// public void printHRByDept(String dept) {
+	//
+	// }
 
 	@Override
 	public int chooseService(int num) {
@@ -41,7 +48,7 @@ public class HRServiceImpl implements HRService {
 
 	@Override
 	public int calculateAbsence(int attendance) {
-		return 24-attendance;
+		return 22-attendance;
 	}
 
 	@Override

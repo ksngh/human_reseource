@@ -1,7 +1,7 @@
 package dto;
 
 public class MemberDTO {
-	int id;
+	String memberId;
 	String memberName;
 	String deptName;
 	String date;
@@ -13,8 +13,8 @@ public class MemberDTO {
 		this.status = status;
 	}
 
-	public int getId() {
-		return id;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	public String getUserName() {
@@ -33,8 +33,8 @@ public class MemberDTO {
 		return status;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public void setUserName(String memberName) {
