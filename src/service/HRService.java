@@ -9,7 +9,7 @@ public interface HRService {
 
 
 	//id로 멤버 찾기
-	Member findMemberById(int id);
+	Member findMemberById(String id);
 
 	//HR 업데이트
 	void updateHR();

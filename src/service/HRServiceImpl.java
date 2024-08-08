@@ -1,5 +1,7 @@
 package service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ import util.DBConnection;
 
 public class HRServiceImpl implements HRService {
 
-	DBConnection dbConnection = new DBConnection();
+	DBConnection dbConnection;
 
 	public HRServiceImpl(DBConnection dbConnection) {
 		this.dbConnection = dbConnection;
@@ -17,7 +19,18 @@ public class HRServiceImpl implements HRService {
 	ArrayList<Integer> pageList = new ArrayList<>();
 
 	@Override
-	public Member findMemberById(int id) {
+	public Member findMemberById(String id) {
+		String sql = "SELECT * FROM EMPLOYEE where EMPLOYEE_PK_ID = " + id;
+		String name = "";
+		try {
+			ResultSet rs = dbConnection.getStmt().executeQuery(sql);
+			while (rs.next()) {
+				name = rs.getString("MEMBER");
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println(name);
 		return null;
 	}
 
