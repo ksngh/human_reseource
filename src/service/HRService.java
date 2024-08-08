@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Map;
+
 import entity.Member;
 
 public interface HRService {
@@ -24,4 +26,7 @@ public interface HRService {
 
 	//결석 계산
 	int calculateAbsence(int attendance);
+
+	//멤버 별 월간 출석 맵 반환
+	Map<String,String> findMonthlyAttendanceByMemberName(Member member);
 }

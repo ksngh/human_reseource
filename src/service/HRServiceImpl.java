@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import entity.Member;
 
@@ -40,7 +41,12 @@ public class HRServiceImpl implements HRService {
 
 	@Override
 	public int calculateAbsence(int attendance) {
-		return 0;
+		return 24-attendance;
+	}
+
+	@Override
+	public Map<String, String> findMonthlyAttendanceByMemberName(Member member) {
+		return null;
 	}
 
 }
