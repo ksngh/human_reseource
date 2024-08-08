@@ -1,19 +1,24 @@
 package dto;
 
 public class MemberDTO {
-	String userName;
+	int id;
+	String memberName;
 	String deptName;
 	String date;
 	String status;
 
-	public MemberDTO(String userName, String date, String status) {
-		this.userName = userName;
+	public MemberDTO(String memberName, String date, String status) {
+		this.memberName = memberName;
 		this.date = date;
 		this.status = status;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getUserName() {
-		return userName;
+		return memberName;
 	}
 
 	public String getDeptName() {
@@ -28,8 +33,12 @@ public class MemberDTO {
 		return status;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setUserName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public void setDeptName(String deptName) {
