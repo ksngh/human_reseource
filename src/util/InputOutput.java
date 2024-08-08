@@ -55,7 +55,7 @@ public class InputOutput {
 	public int monthlyHR(MemberDTO memberDTO) throws IOException {
 
 		bw.write("==== 직원별 월별 근태 현황 ====\r\n");
-		bw.write("직원 ID : "+ memberDTO.getId()+"\r\n");
+		bw.write("직원 ID : "+ memberDTO.getMemberId()+"\r\n");
 		bw.write("이름 : "+ memberDTO.getUserName()+"\r\n");
 		bw.write("부서 : "+ memberDTO.getDeptName()+"\r\n");
 		bw.write("3. 근태 삭제 *\r\n");
