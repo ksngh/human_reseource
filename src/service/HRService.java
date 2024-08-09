@@ -1,5 +1,7 @@
 package service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import dto.DeleteDTO;
@@ -26,11 +28,13 @@ public interface HRService {
 	int chooseService(int userNum);
 
 	//출근율 계산
-	long calculateAttendanceRate(int attendance);
+	int calculateAttendanceRate(int attendance);
 
 	//결석 계산
 	int calculateAbsence(int attendance);
 
 	//멤버 별 월간 출석 맵 반환
 	Map<String,String> findMonthlyAttendanceByMemberName(Member member);
+
+	void run() throws IOException;
 }
