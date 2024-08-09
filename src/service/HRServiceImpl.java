@@ -1,8 +1,8 @@
 package service;
 
-import static java.lang.Math.*;
-
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -19,14 +19,24 @@ public class HRServiceImpl implements HRService {
 
 	ArrayList<Integer> pageList;
 
-
 	public HRServiceImpl(InputOutput inputOutput, DBConnection dbConnection) {
 		this.inputOutput = inputOutput;
 		this.dbConnection = dbConnection;
 	}
 
 	@Override
-	public Member findMemberById(int id) {
+	public Member findMemberById(String id) {
+		String sql = "SELECT * FROM EMPLOYEE where EMPLOYEE_PK_ID = " + id;
+		String name = "";
+		try {
+			ResultSet rs = dbConnection.getStmt().executeQuery(sql);
+			while (rs.next()) {
+				name = rs.getString("MEMBER");
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println(name);
 		return null;
 	}
 
@@ -46,14 +56,13 @@ public class HRServiceImpl implements HRService {
 	// }
 
 	@Override
-	public ArrayList<Integer> chooseService(int num){
-		//미구현
-		return null;
+	public int chooseService(int num) {
+		return 0;
 	}
 
 	@Override
-	public int calculateAttendanceRate(int attendance) {
-		return round(((float)attendance /22)*100);
+	public long calculateAttendanceRate(int attendance) {
+		return 0;
 	}
 
 	@Override
@@ -115,4 +124,5 @@ public class HRServiceImpl implements HRService {
 			}
 		}
 	}
+
 }
