@@ -1,20 +1,29 @@
 package service;
 
+import static java.lang.Math.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import dto.DeptMonthlyDTO;
+import dto.UpdateDTO;
 import entity.Member;
 import util.DBConnection;
+import util.InputOutput;
 
 public class HRServiceImpl implements HRService {
 
-	DBConnection dbConnection = new DBConnection();
+	private DBConnection dbConnection;
+	private InputOutput inputOutput;
 
-	public HRServiceImpl(DBConnection dbConnection) {
+	ArrayList<Integer> pageList;
+
+
+	public HRServiceImpl(InputOutput inputOutput, DBConnection dbConnection) {
+		this.inputOutput = inputOutput;
 		this.dbConnection = dbConnection;
 	}
-
-	ArrayList<Integer> pageList = new ArrayList<>();
 
 	@Override
 	public Member findMemberById(int id) {
@@ -22,7 +31,7 @@ public class HRServiceImpl implements HRService {
 	}
 
 	@Override
-	public void updateHR() {
+	public void updateHR(UpdateDTO updateDTO) {
 
 	}
 
@@ -37,13 +46,14 @@ public class HRServiceImpl implements HRService {
 	// }
 
 	@Override
-	public int chooseService(int num) {
-		return 0;
+	public ArrayList<Integer> chooseService(int num){
+		//미구현
+		return null;
 	}
 
 	@Override
-	public long calculateAttendanceRate(int attendance) {
-		return 0;
+	public int calculateAttendanceRate(int attendance) {
+		return round(((float)attendance /22)*100);
 	}
 
 	@Override
@@ -56,4 +66,53 @@ public class HRServiceImpl implements HRService {
 		return null;
 	}
 
+	@Override
+	public void run() throws IOException {
+
+		pageList = new ArrayList<>();
+		pageList.add(1);
+
+		while (true) {
+
+			if (pageList.isEmpty()){
+				break;
+			} else if(pageList.size()==1){
+
+				int userNum01 = inputOutput.HRSystem();
+
+				switch (userNum01){
+					case 3:
+						pageList.add(userNum01);
+						break;
+					case 0 :
+						pageList.removeLast();
+						break;
+				}
+			} else{
+
+				int userNum02 = inputOutput.manageHR();
+
+				switch (userNum02){
+					case 2:
+						//근태 수정
+						UpdateDTO updateDTO = inputOutput.getInfoHR();
+						updateHR(updateDTO);
+						break;
+					case 3:
+						//근태 삭제
+
+						break;
+					case 5:
+						//부서별 월별 근태 현황 보기
+						DeptMonthlyDTO deptMonthlyDTO = new DeptMonthlyDTO();
+
+						break;
+					case 0:
+						//메인 메뉴로 돌아가기
+						pageList.removeLast();
+						break;
+				}
+			}
+		}
+	}
 }

@@ -1,9 +1,19 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.io.IOException;
+import java.util.ArrayList;
+
+import service.HRServiceImpl;
+import util.DBConnection;
+import util.InputOutput;
+
+
 public class Main {
-	public static void main(String[] args) {
-		//TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-		// to see how IntelliJ IDEA suggests fixing it.
+	public static void main(String[] args) throws IOException {
+
+		DBConnection dbConnection = new DBConnection();
+		InputOutput inputOutput = new InputOutput();
+
+		HRServiceImpl hrService = new HRServiceImpl(inputOutput, dbConnection);
+		hrService.run();
 
 
 	}

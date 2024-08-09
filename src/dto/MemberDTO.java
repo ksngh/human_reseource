@@ -1,55 +1,30 @@
 package dto;
 
+import java.util.Map;
+
 public class MemberDTO {
-	String memberId;
-	String memberName;
-	String deptName;
-	String date;
-	String status;
 
-	public MemberDTO(String memberName, String date, String status) {
-		this.memberName = memberName;
-		this.date = date;
-		this.status = status;
+	String id;
+	Map<String,String> dateStatus;
+
+	public MemberDTO(String id, Map<String, String> dateStatus) {
+		this.id = id;
+		this.dateStatus = dateStatus;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getId() {
+		return id;
 	}
 
-	public String getUserName() {
-		return memberName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getDeptName() {
-		return deptName;
+	public Map<String, String> getDateStatus() {
+		return dateStatus;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public void setUserName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setDateStatus(Map<String, String> dateStatus) {
+		this.dateStatus = dateStatus;
 	}
 }
