@@ -5,10 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 
+import dto.DeleteDTO;
 import dto.DeptMonthlyDTO;
-import dto.MemberDTO;
 import dto.UpdateDTO;
 
 public class InputOutput {
@@ -72,7 +71,7 @@ public class InputOutput {
 	// 	return 0;
 	// }
 
-	public UpdateDTO getInfoHR() throws IOException {
+	public UpdateDTO updateInfo() throws IOException {
 
 		UpdateDTO updateDTO = new UpdateDTO();
 
@@ -93,6 +92,22 @@ public class InputOutput {
 		bw.flush();
 
 		return updateDTO;
+	}
+
+	public DeleteDTO deleteInfo() throws IOException {
+
+		DeleteDTO deleteDTO = new DeleteDTO();
+
+		bw.write("==== 근태 삭제 ====\r\n");
+		bw.write("직원 ID 입력 : " +"\r\n");
+		bw.flush();
+		deleteDTO.setMemberId(br.readLine());
+
+		bw.write("날짜 입력 (YYYY-MM-DD):"+"\r\n");
+		bw.flush();
+		deleteDTO.setDate(br.readLine());
+
+		return deleteDTO;
 	}
 
 	public void printDeptMonthlyHR(DeptMonthlyDTO deptMonthlyDTO) throws IOException {
