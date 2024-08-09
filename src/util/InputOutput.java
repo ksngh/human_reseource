@@ -57,20 +57,6 @@ public class InputOutput {
 
 	}
 
-	// //월별 근태 현황 출력 및 유저 입력
-	// public int monthlyHR(MemberDTO memberDTO) throws IOException {
-	//
-	// 	// 부서별로
-	// 	// 부서 : 개발팀
-	// 	// 8월 01~
-	// 	bw.write("==== 직원별 월별 근태 현황 ====\r\n");
-	// 	bw.write("직원 ID : "+ memberDTO.getMemberId()+"\r\n");
-	// 	bw.write("이름 : "+ memberDTO.getUserName()+"\r\n");
-	// 	bw.write("부서 : "+ memberDTO.getDeptName()+"\r\n");
-	// 	bw.write("3. 근태 삭제 *\r\n");
-	// 	return 0;
-	// }
-
 	public UpdateDTO updateInfo() throws IOException {
 
 		UpdateDTO updateDTO = new UpdateDTO();
@@ -121,14 +107,12 @@ public class InputOutput {
 	public void printDeptMonthlyHR(DeptMonthlyDTO deptMonthlyDTO) throws IOException {
 
 		bw.write("직원 ID : "+deptMonthlyDTO.getMemberId()+"\r\n");
-
 		bw.write("이름 : " +deptMonthlyDTO.getName()+"\r\n");
-
-		bw.write("출근율 : " +deptMonthlyDTO.getAttendanceRate()+"\r\n");
+		bw.write("출근율 : " +deptMonthlyDTO.getAttendanceRate()+"%\r\n");
 		bw.flush();
 		bw.write("출근 : " + deptMonthlyDTO.getAttendance() +
 				", 결근 : " + deptMonthlyDTO.getAbsence() +
-				", 휴가 : " + deptMonthlyDTO.getHoliday());
+				", 휴가 : " + deptMonthlyDTO.getHoliday() + "\r\n");
 		bw.flush();
 
 	}
