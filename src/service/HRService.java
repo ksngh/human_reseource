@@ -2,6 +2,8 @@ package service;
 
 import java.util.Map;
 
+import dto.DeleteDTO;
+import dto.UpdateDTO;
 import entity.Member;
 
 public interface HRService {
@@ -12,10 +14,10 @@ public interface HRService {
 	Member findMemberById(String id);
 
 	//HR 업데이트
-	void updateHR();
+	void updateHR(UpdateDTO updateDTO);
 
 	//HR 지우기
-	void deleteHR();
+	void deleteHR(DeleteDTO deleteDTO);
 
 	// //부서명으로 월 별 근태 현황 찾기
 	// void printHRByDept(String dept);
