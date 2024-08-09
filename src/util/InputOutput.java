@@ -70,7 +70,7 @@ public class InputOutput {
 		bw.flush();
 		updateDTO.setDate(br.readLine());
 
-		bw.write("근무 상태 입력 (출근/퇴근/휴가 등):\r\n");
+		bw.write("근무 상태 입력 (출근/결근/휴가 등):\r\n");
 		bw.flush();
 		updateDTO.setStatus(br.readLine());
 

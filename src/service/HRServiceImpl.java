@@ -86,11 +86,6 @@ public class HRServiceImpl implements HRService {
 	}
 
 	@Override
-	public int calculateAbsence(int attendance) {
-		return 22-attendance;
-	}
-
-	@Override
 	public ArrayList<DeptMonthlyDTO> findMonthlyAttendanceByMemberName(String dept) {
 		ArrayList<DeptMonthlyDTO> deptMonthlyDTOArrayList = new ArrayList<>();
 		String sql = "SELECT\n" +
