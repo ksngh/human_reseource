@@ -13,6 +13,8 @@ import entity.Member;
 import util.DBConnection;
 import util.InputOutput;
 
+import static java.lang.Math.round;
+
 public class HRServiceImpl implements HRService {
 
 	private DBConnection dbConnection;
@@ -90,7 +92,7 @@ public class HRServiceImpl implements HRService {
 
 	@Override
 	public int calculateAttendanceRate(int attendance) {
-		return 0;
+		return (int)round( (attendance/(double)22) * 100 );
 	}
 
 	@Override
@@ -182,7 +184,9 @@ public class HRServiceImpl implements HRService {
 						ArrayList<DeptMonthlyDTO> ar = findMonthlyAttendanceByMemberName(deptMonthlyDTO.getDept());
 						Iterator<DeptMonthlyDTO> iterator = ar.iterator();
 						while (iterator.hasNext()){
-							inputOutput.printDeptMonthlyHR(iterator.next());
+							DeptMonthlyDTO temptDto = iterator.next();
+							temptDto.setAttendanceRate(calculateAttendanceRate(temptDto.getAttendance()));
+							inputOutput.printDeptMonthlyHR(temptDto);
 						}
 						break;
 					case 0:
