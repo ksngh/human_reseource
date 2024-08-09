@@ -1,32 +1,41 @@
 package dto;
 
 public class UpdateDTO {
-	String id;
-	String date;
-	String status;
 
-	public String getStatus() {
-		return status;
-	}
+    private String memberId;
+    private String date;
+    private String status;
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public UpdateDTO() {
+    }
 
-	public String getId() {
-		return id;
-	}
+    public UpdateDTO(String memberId, String date, String status) {
+        this.memberId = memberId;
+        this.date = date;
+        this.status = status;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getMemeberId() {
+        return memberId;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public String getDate() {
+        return date;
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

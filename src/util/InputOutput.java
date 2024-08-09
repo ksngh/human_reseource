@@ -78,7 +78,7 @@ public class InputOutput {
 		bw.write("==== 근태 수정 ====\r\n");
 		bw.write("직원 ID 입력 : " +"\r\n");
 		bw.flush();
-		updateDTO.setId(br.readLine());
+		updateDTO.setMemberId(br.readLine());
 
 		bw.write("날짜 입력 (YYYY-MM-DD):"+"\r\n");
 		bw.flush();
