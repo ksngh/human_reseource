@@ -109,14 +109,27 @@ public class InputOutput {
 
 		return deleteDTO;
 	}
+	public DeptMonthlyDTO getDeptMonthlyDTO() throws IOException {
 
+		bw.write("==== 부서별 월별 근태 현황 ====\r\n");
+		bw.write("부서: \r\n");
+		bw.flush();
+		String dept = br.readLine();
+		return new DeptMonthlyDTO(dept);
+
+	}
 	public void printDeptMonthlyHR(DeptMonthlyDTO deptMonthlyDTO) throws IOException {
 
-		// ArrayList<MemberDTO>
-		//
-		// bw.write("부서: "+deptMonthlyDTO.getDept()+"\r\n");
-		// bw.flush();
-		// bw.write("직원 ID: "+deptMonthlyDTO.get()+"\r\n");
+		bw.write("직원 ID : "+deptMonthlyDTO.getMemberId()+"\r\n");
+
+		bw.write("이름 : " +deptMonthlyDTO.getName()+"\r\n");
+
+		bw.write("출근율 : " +deptMonthlyDTO.getAttendanceRate()+"\r\n");
+		bw.flush();
+		bw.write("출근 : " + deptMonthlyDTO.getAttendance() +
+				", 결근 : " + deptMonthlyDTO.getAbsence() +
+				", 휴가 : " + deptMonthlyDTO.getHoliday());
+		bw.flush();
 
 	}
 }

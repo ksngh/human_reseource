@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Iterator;
 
 import dto.DeleteDTO;
 import dto.UpdateDTO;
@@ -99,8 +99,44 @@ public class HRServiceImpl implements HRService {
 	}
 
 	@Override
-	public Map<String, String> findMonthlyAttendanceByMemberName(Member member) {
-		return null;
+	public ArrayList<DeptMonthlyDTO> findMonthlyAttendanceByMemberName(String dept) {
+		ArrayList<DeptMonthlyDTO> deptMonthlyDTOArrayList = new ArrayList<>();
+		String sql = "SELECT\n" +
+				"    d.DEPT_NAME as dept, \n" +
+				"    e.EMPLOYEE_PK_ID as memberId,\n" +
+				"    e.MEMBER as `name`,\n" +
+				"    SUM(CASE WHEN wa.WORK_STAT_FK_ID = 'STAT_01' THEN 1 ELSE 0 END) AS 'attendance',\n" +
+				"    SUM(CASE WHEN wa.WORK_STAT_FK_ID = 'STAT_02' THEN 1 ELSE 0 END) AS 'absence',\n" +
+				"    SUM(CASE WHEN wa.WORK_STAT_FK_ID = 'STAT_03' THEN 1 ELSE 0 END) AS 'holiday'\n" +
+				"FROM\n" +
+				"    EMPLOYEE e\n" +
+				"JOIN\n" +
+				"    DEPT d ON e.DEPT_FK_ID = d.DEPT_PK_ID\n" +
+				"LEFT JOIN\n" +
+				"    EMPLOYEE_ATTENDANCE wa ON e.EMPLOYEE_PK_ID = wa.EMPLOYEE_FK_ID\n" +
+				"where d.DEPT_NAME = '"+dept+"'\n" +
+				"GROUP BY\n" +
+				"    d.DEPT_NAME, e.MEMBER ,e.EMPLOYEE_PK_ID \n" +
+				"ORDER BY\n" +
+				"    d.DEPT_NAME, e.MEMBER";
+        try {
+			ResultSet rs = dbConnection.getStmt().executeQuery(sql);
+			while (rs.next()) {
+				String inputDept = rs.getString("dept");
+				String memberId = rs.getString("memberId");
+				String name = rs.getString("name");
+				int absence = Integer.parseInt(rs.getString("absence"));
+				int attendance = Integer.parseInt(rs.getString("attendance"));
+				int holiday = Integer.parseInt(rs.getString("holiday"));
+				deptMonthlyDTOArrayList.add(
+						new DeptMonthlyDTO(
+						memberId,name,inputDept,absence,attendance,holiday)
+				);
+			}
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return deptMonthlyDTOArrayList;
 	}
 
 	@Override
@@ -137,12 +173,17 @@ public class HRServiceImpl implements HRService {
 						break;
 					case 3:
 						//근태 삭제
-
+						DeleteDTO deleteDTO = inputOutput.deleteInfo();
+						deleteHR(deleteDTO);
 						break;
 					case 5:
 						//부서별 월별 근태 현황 보기
-						// DeptMonthlyDTO deptMonthlyDTO = new DeptMonthlyDTO();
-
+						DeptMonthlyDTO deptMonthlyDTO = inputOutput.getDeptMonthlyDTO();
+						ArrayList<DeptMonthlyDTO> ar = findMonthlyAttendanceByMemberName(deptMonthlyDTO.getDept());
+						Iterator<DeptMonthlyDTO> iterator = ar.iterator();
+						while (iterator.hasNext()){
+							inputOutput.printDeptMonthlyHR(iterator.next());
+						}
 						break;
 					case 0:
 						//메인 메뉴로 돌아가기

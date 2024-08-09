@@ -2,9 +2,11 @@ package service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import dto.DeleteDTO;
+import dto.DeptMonthlyDTO;
 import dto.UpdateDTO;
 import entity.Member;
 
@@ -34,7 +36,7 @@ public interface HRService {
 	int calculateAbsence(int attendance);
 
 	//멤버 별 월간 출석 맵 반환
-	Map<String,String> findMonthlyAttendanceByMemberName(Member member);
+	ArrayList<DeptMonthlyDTO> findMonthlyAttendanceByMemberName(String dept);
 
 	void run() throws IOException;
 }
