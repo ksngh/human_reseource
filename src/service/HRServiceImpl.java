@@ -80,16 +80,6 @@ public class HRServiceImpl implements HRService {
         }
     }
 
-	// @Override
-	// public void printHRByDept(String dept) {
-	//
-	// }
-
-	@Override
-	public int chooseService(int num) {
-		return 0;
-	}
-
 	@Override
 	public int calculateAttendanceRate(int attendance) {
 		return (int)round( (attendance/(double)22) * 100 );
